@@ -6,21 +6,14 @@ const myModal = document.querySelector('#modal-content');
 const heartContainer = document.getElementById('container');
 
 const loveCalculator = () => {
-	/* To get the input of user */
+	/* To get the input of the user */
 
 	let name1 = document.getElementById('name1').value;
 	let name2 = document.getElementById('someoneName').value;
-	let l = 'L',
-		o = 'O',
-		v = 'V',
-		e = 'E',
-		r = 'R';
-
 	name1 = name1.toUpperCase();
 	name2 = name2.toUpperCase();
-
 	let coupleName = name1 + name2;
-	let k = coupleName.length;
+	let nameCount = coupleName.length; //to get the number of the string
 
 	/* To pick the Flame result  */
 	const toGetTheFlame = () => {
@@ -29,12 +22,16 @@ const loveCalculator = () => {
 		for (let i = 0; i < arr_char.length; i++) {
 			if (coupleName.indexOf(arr_char[i]) === coupleName.lastIndexOf(arr_char[i])) result_arr.push(arr_char[i]);
 		}
-		let initialFlameResult = result_arr.join('').length - 1; //result in number use to get the initial flame result
+
+		//result in number use to get the initial flame result
+		let initialFlameResult = result_arr.join('').length - 1;
+
 		if (initialFlameResult > 4) {
 			initialFlameResult = initialFlameResult % 5;
 		} else {
 			initialFlameResult = initialFlameResult;
 		}
+
 		const m = ['F', 'L', 'A', 'M', 'E'];
 		let flameResult;
 		if (name1 === '' || name2 === '') {
@@ -46,21 +43,32 @@ const loveCalculator = () => {
 	};
 
 	const toGetThePercentage = () => {
+		let l = 'L',
+			o = 'O',
+			v = 'V',
+			e = 'E',
+			r = 'R';
+
 		let lover = [l, o, v, e, r];
+
 		let lover2;
+
 		let strLO, strOV, strVE, strER, LO, OV, VE, ER;
+
 		lover2 = lover.map((lover) => {
 			let eachLetterHas = 0;
+
 			for (let n = 0; n < lover.length; n++) {
 				// lover[n] = 0;
 				let num = 0;
-				for (let i = 0; i < k; i++) {
+				for (let i = 0; i < nameCount; i++) {
 					if (coupleName[i] === lover[n]) {
 						num++;
 					}
 					eachLetterHas = num;
 				}
 			}
+
 			return eachLetterHas;
 		});
 
@@ -184,16 +192,19 @@ const loveCalculator = () => {
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
+	// to spawn the heart animation
 	const heartAnimation = `<div class="container">
-                <div class="preloader">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="shadow"></div>
-            </div>`;
+                				<div class="preloader">
+                    				<span></span>
+                    				<span></span>
+                    				<span></span>
+                				</div>
+                				<div class="shadow">
+								</div>
+            				</div>`;
 	heartContainer.innerHTML = heartAnimation;
 
+	// then the modal for Result
 	const myModalContent = `<article id="bastaResult">
                 <figure id="img-result">
                 </figure>
